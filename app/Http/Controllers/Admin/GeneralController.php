@@ -7,7 +7,6 @@ use App\Models\Blog;
 use App\Models\Carousel;
 use App\Models\CarouselContent;
 use App\Models\Contact;
-use App\Models\Gallery;
 use App\Models\Service;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -17,10 +16,10 @@ class GeneralController extends Controller
 {
     public function index()
     {
-        $currencies = (new ApiController)->getCurrencies();
+        //$currencies = (new ApiController)->getCurrencies();
         $blogs = Blog::latest()->take(2,1)->get();
         $services = Service::all();
-        return view('Admin.pages.dashboard',compact(['currencies','blogs','services']));
+        return view('Admin.pages.dashboard',compact(['blogs','services']));
     }
 
     ################################################################
@@ -587,75 +586,6 @@ public function carouseldeactive($id){
 ################################################################
 
 
-
-################################################################
-#        CAROUSEL SECTION
-################################################################
-
-    public function gallery(){
-      return view('Admin.pages.gallery');
-    }
-
-    public function gallerystore(Request $request){
-
-        $this->validate(request(),['file'=>'image|mimes:jpg,jpeg,png']);
-
-        $image =  request()->file('file');
-        if($image->isValid()){
-            $newimagename = rand(1, 100) . time() . '.' . $image->getClientOriginalExtension();
-            $path = "/photos/gallery";
-            $imagepath = public_path() . $path;
-            $location = $imagepath . '/' . $newimagename;
-            $imageurl = $path . '/' . $newimagename; //for DB
-            makedirectory($path);
-            $response = compressImage(['source' => $image, 'destination' => $location]);
-
-            if ($response != true){
-                $image->move($imagepath, $newimagename);
-            }
-            $img = Gallery::create([
-                'image'=>$imageurl
-            ]);
-
-        }
-    }
-
-    function galleryfetch()
-    {
-        $images = Gallery::all();
-        $output = '<div class="row">';
-        foreach($images as $image)
-        {
-            $output = '<div class="card-columns flex-row">';
-            foreach($images as $image)
-            {
-
-                $output .= '<div class="card d-inline-flex">
-                            <img class="card-img-top img-fluid" src="'. $image->image .'"
-                                 alt="Card image cap">
-                                  <button type="button" class="btn remove_image" data-id="'.$image->id.'">Sil</button>
-                         </div>';
-            }
-
-
-
-        }
-        $output .= '</div>';
-        echo $output;
-    }
-
-    function gallerydelete(Request $request)
-    {
-        if( $request->get('id'))
-        {
-            $image = Gallery::find($request->get('id'));
-            deleteimage(public_path($image->image) );
-            $deleted = $image->delete();
-        }
-    }
-################################################################
-#        END  CAROUSEL SECTION
-################################################################
 
 }
 

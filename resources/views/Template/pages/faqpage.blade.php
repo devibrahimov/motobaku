@@ -5,39 +5,56 @@
 
 @section('content')
 
-    <section class="page-title page-title-layout5 bg-overlay text-center">
-        <div class="bg-img"><img src="/template/images/page-titles/6.jpg" alt="background"></div>
+
+    <div class="breadcrumb-area breadcrumb-style-6 margin-bottom-100">
+        <div class="breadcrumb-inner">
+            <h1 class="page-title">{{__('content.about')}}</h1>
+            <ul class="page-list">
+                <li><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
+                <li><a href="{{route('site.faq')}}">{{__('content.faq')}}</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <!-- button-area start -->
+    <div class="element-accordion-area margin-top-120 margin-bottom-80">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h1 class="pagetitle__heading">{{__('content.sss')}}</h1>
-
-                </div><!-- /.col-xl-6 -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section><!-- /.page-title -->
-    <section class="faq pt-120 pb-70">
-        <div class="container">
-            <div class="row">
-
-
-                <div class="col-sm-12 col-md-12 col-lg-8" id="accordion">
-                    @foreach($faqs as $faq)
-                    <div class="accordion-item {{$loop->first?'opened' : ''}}">
-                        <div class="accordion__header" data-toggle="collapse" data-target="#collapse{{$faq->faq_id}}">
-                            <a class="accordion__title" href="#"> {{$faq->question}}</a>
-                        </div><!-- /.accordion-item-header -->
-                        <div id="collapse{{$faq->faq_id}}" class="collapse {{$loop->first?'show' : ''}} " data-parent="#accordion">
-                            <div class="accordion__body">
-                                <p> {{$faq->answer}}</p>
-                            </div><!-- /.accordion-item-body -->
+                <div class="col-md-12 margin-bottom-20">
+                    <div class="accordion-style-2" id="accordionExample">
+                  @if(isset($faqs))
+                        @foreach($faqs as $faq)
+                        <div class="card">
+                            <div class="card-header" id="heading{{$faq->faq_id}}">
+                                <p class="mb-0">
+                                    <a href="#" role="button" data-toggle="collapse"
+                                       data-target="#collapse{{$faq->faq_id}}" aria-expanded="{{$loop->first?'true' : 'false'}}"
+                                       aria-controls="collapse{{$faq->faq_id}}">
+                                        {{$faq->question}}
+                                    </a>
+                                </p>
+                            </div>
+                            <div id="collapse{{$faq->faq_id}}" class="collapse {{$loop->first?'show' : ''}}" aria-labelledby="heading{{$faq->faq_id}}"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    {{$faq->answer}}
+                                </div>
+                            </div>
                         </div>
-                    </div><!-- /.accordion-item -->
-                    @endforeach
-                </div><!-- /.col-lg-8 -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section><!-- /.FAQ -->
+                        @endforeach
+                  @endif
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- button-area end -->
+
+
 
 @endsection
 

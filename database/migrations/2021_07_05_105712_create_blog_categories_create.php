@@ -16,6 +16,7 @@ class CreateBlogCategoriesCreate extends Migration
         Schema::create('blogcategories', function (Blueprint $table) {
             $table->id();
             $table->integer('show')->default(1);
+            $table->string('image');
             $table->timestamps();
         });
     }

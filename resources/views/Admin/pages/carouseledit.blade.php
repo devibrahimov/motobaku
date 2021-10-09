@@ -28,7 +28,7 @@
                                 <div class="form-group col-12">
                                     <label for="">Şəkil</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input"   name="image" accept="image/jpeg" id="inputGroupFile01">
+                                        <input type="file" class="custom-file-input"   name="image" accept="image/*" id="inputGroupFile01">
                                         <label class="custom-file-label" for="inputGroupFile01">Şəkil seçin</label>
 
                                     </div>

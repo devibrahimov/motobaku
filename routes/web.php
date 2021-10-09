@@ -69,11 +69,6 @@ use Illuminate\Support\Facades\Route;
         Route::get('/qaleriya-sekil','Admin\GeneralController@galleryfetch')->name('gallery.fetch') ;
         Route::get('/qaleriya-sil','Admin\GeneralController@gallerydelete')->name('gallery.delete') ;
 
-        Route::get('/metbuat','Admin\CorporateController@adminpress')->name('adminpress');
-        Route::post('/metbuat','Admin\CorporateController@adminpressstore') ;
-        Route::post('/metbuat/{id}','Admin\CorporateController@adminpressupdate')->name('adminpressupdate') ;
-        Route::delete('/metbuat-sil/{id}','Admin\CorporateController@pressdelete')->name('pressdelete');
-        Route::get('/metbuat-ana-sehifede/{id}','Admin\CorporateController@pressactiveathome')->name('pressactiveathome');
 
         Route::get('/blog-kategoriyası','Admin\OtherController@blog_categories')->name('blog_categories');
         Route::post('/blog-kategoriyası','Admin\OtherController@blog_category_store') ;
@@ -107,8 +102,7 @@ use Illuminate\Support\Facades\Route;
 
                Route::get('/','Site\GeneralController@index')->name('site.index');
                Route::get('/hakkimizda','Site\GeneralController@about')->name('site.about');
-               Route::get('/metbuatda','Site\GeneralController@press')->name('site.press');
-               Route::get('/tss','Site\GeneralController@faq')->name('site.faq');
+               Route::get('/sual-cavab','Site\GeneralController@faq')->name('site.faq');
                Route::get('/xidmetler','Site\GeneralController@services')->name('site.services');
                Route::get('/xidmet/{id}/{slug}','Site\GeneralController@serviceDetail')->name('site.serviceDetail');
                Route::get('/elaqe','Site\GeneralController@contact')->name('site.contact');
@@ -121,8 +115,7 @@ use Illuminate\Support\Facades\Route;
     else{
         Route::get('/','Site\GeneralController@index')->name('site.index');
         Route::get('/hakkimizda','Site\GeneralController@about')->name('site.about');
-        Route::get('/metbuatda','Site\GeneralController@press')->name('site.press');
-        Route::get('/tss','Site\GeneralController@faq')->name('site.faq');
+        Route::get('/sual-cavab','Site\GeneralController@faq')->name('site.faq');
         Route::get('/xidmetler','Site\GeneralController@services')->name('site.services');
         Route::get('/xidmet/{id}/{slug}','Site\GeneralController@serviceDetail')->name('site.serviceDetail');
         Route::get('/elaqe','Site\GeneralController@contact')->name('site.contact');

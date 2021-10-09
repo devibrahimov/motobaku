@@ -6,91 +6,107 @@
 
 @section('content')
 
-    <section class="page-title page-title-layout2 bg-overlay text-center pb-0">
-        <div class="bg-img"><img src="{{$service->image}}" alt="background"></div>
+    <div class="breadcrumb-style-3" >
+        <div class="breadcrumb-inner">
+            <h1 class="page-title">{{$service->name}}</h1>
+            <ul class="page-list">
+                <li><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
+                <li><a href="{{route('site.serviceDetail',['id'=> $service->service_id,'slug'=>\Illuminate\Support\Str::slug($service->name)])}}">{{$service->name}}</a></li>
+            </ul>
+        </div>
+        <div class="breadcrumb-slider">
+
+            @foreach($otherservices as $s)
+            <div class="single-item">
+                <div class="slider-top">
+                    <span class="total">01</span>
+                    <span class="title">Paket</span>
+                </div>
+                <div class="slider-bottom">
+                    <span class="title">{{__('content.otherCourses')}}</span>
+                    <h1> <a href="{{route('site.serviceDetail',['id'=> $s->service_id,'slug'=>\Illuminate\Support\Str::slug($s->name)])}}">{{$s->name}}</a> </h1>
+                    <span class="content">{{$s->meta_content}}</span>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="blog-single-content">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8 offset-xl-2">
-                    <div class="pagetitle__icon">
-                        <img src="{{$service->icon}}" width="55" alt="background">
-                    </div>
-                    <h1 class="pagetitle__heading">{{$service->name}}</h1>
-                    <p class="pagetitle__desc mb-30">{{$service->meta_content}}
-                    </p>
-                    <a href="#content" class="scroll-down"><i class="fas fa-long-arrow-alt-down"></i></a>
-                </div><!-- /.col-xl-8 -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section><!-- /.page-title -->
+                <div class="blog-details-item">
+                    <div class="content margin-top-75">
 
-    <section id="content" class=" pb-80">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-8">
-                    <div class="text-block mb-50">
+                       <img src="{{$service->image}}" alt="{{$service->name}}"
+                            title="{{$service->name}}" width="300px" class="float-left" style="margin-right: 30px!important;">
 
-                        <div class="video-banner-layout3 bg-overlay mb-50">
-                            <img src="{{$service->image}}" alt="banner">
-{{--                            <a class="video__btn video__btn-white popup-video" href="https://www.youtube.com/watch?v=nrJtHemSPW4">--}}
-{{--                                <div class="video__player">--}}
-{{--                                    <i class="fa fa-play"></i>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-                        </div><!-- /.video-banner -->
-                        <p class="text-block__desc mb-20">
-                            {!! $service->content !!}
-                        </p>
-                    </div><!-- /.text-block -->
-                </div><!-- /.col-lg-8 -->
-                <div class="col-sm-12 col-md-12 col-lg-4">
-                    <aside class="sidebar has-marign-left sticky-top">
-                        <div class="widget widget-services">
-                            <h5 class="widget__title">{{__('content.otherServices')}}</h5>
-                            <div class="widget-content">
-                                <ul class="list-unstyled mb-0">
-                                   @if(isset($otherservices))
-                                        @foreach($otherservices as $s)
-                                              <li><a href="{{route('site.serviceDetail',['id'=> $s->service_id,'slug'=>\Illuminate\Support\Str::slug($s->name)])}}"><span>
-                                                          {{$s->name}}
-                                                      </span><i class="icon-arrow-right"></i></a></li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            </div><!-- /.widget-content -->
-                        </div><!-- /.widget-services -->
-{{--                        <div class="widget widget-help bg-overlay bg-overlay-secondary-gradient">--}}
-{{--                            <div class="bg-img"><img src="/template/images/banners/5.jpg" alt="background"></div>--}}
-{{--                            <div class="widget-content">--}}
-{{--                                <div class="widget__icon">--}}
-{{--                                    <i class="icon-call3"></i>--}}
-{{--                                </div>--}}
-{{--                                <h4 class="widget__title">{{__('content.contact')}}</h4>--}}
-{{--                                <p class="widget__desc">{{__('content.contactInformContent')}}--}}
-{{--                                </p>--}}
-{{--                                <a href="tel:{{contact()->number}}" class="phone__number">--}}
-{{--                                    <i class="icon-phone"></i> <span>{{contact()->number}}</span>--}}
-{{--                                </a>--}}
-{{--                            </div><!-- /.widget-content -->--}}
-{{--                        </div><!-- /.widget-help -->--}}
-                        <div class="widget widget-schedule">
-                            <div class="widget-content">
-                                <div class="widget__icon">
-                                    <i class="icon-charity2"></i>
+                        <h5 style="padding-left: 30px!important" class="margin-bottom-30">{{$service->name}}</h5>
+
+                    <p style="padding-left: 30px!important">{!! $service->content !!}</p>
+                        {{--<ul class="post-meta margin-top-50">--}}
+{{--                            <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>--}}
+{{--                            <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>--}}
+{{--                        </ul>--}}
+
+                        <!-- comment area start -->
+                        <div class="comment-area">
+                            <ul class="comment-list">
+                                <li class="parent">
+                                    <div class="single-comment-wrap">
+                                        <div class="thumb">
+                                            <img alt="comment" src="assets/img/blog/comment1.png">
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">William Khan</h4>
+                                            <div class="comment-content">
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="children">
+                                        <li>
+                                            <div class="single-comment-wrap">
+                                                <div class="thumb">
+                                                    <img alt="comment" src="assets/img/blog/comment2.png">
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="title">Jalali khan</h4>
+                                                    <div class="comment-content">
+                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent">
+                                    <div class="single-comment-wrap">
+                                        <div class="thumb">
+                                            <img alt="comment" src="assets/img/blog/comment3.png">
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">Harvard Ali</h4>
+                                            <div class="comment-content">
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <form action="#" class="comment-form margin-top-50">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="write comments.....">
                                 </div>
-{{--                                <h4 class="widget__title">{{__('content.workstime')}} </h4>--}}
-                                <ul class="time__list list-unstyled mb-0">
-
-                                    <li><span>{{strtolower(__('content.contact'))}} :</span><span>{{contact()->number}}</span></li>
-                                    <li><span>{{__('content.workinghourstart')}} :</span><span>{{contact()->workinghourstart}}</span></li>
-                                    <li><span>{{__('content.workinghourend')}} : </span><span>{{contact()->workinghourend}}</span></li>
-                                </ul>
-                            </div><!-- /.widget-content -->
-                        </div><!-- /.widget-schedule -->
-                    </aside><!-- /.sidebar -->
-                </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section>
+                            </form>
+                        </div>
+                        <!-- comment area end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 

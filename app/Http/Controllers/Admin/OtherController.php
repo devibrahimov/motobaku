@@ -29,6 +29,28 @@ class OtherController extends Controller
             $blogcat = new BlogCategory();
 
             $blogcat->show = 0 ;
+
+            $image = $request->file('image');
+
+            if ($image) {
+                $path = "/photos/blogcategories";
+                $imagepath = public_path() . $path;
+                if ($image->isValid()) {
+                    $newimagename = rand(1, 100) . time() . '.' . $image->getClientOriginalExtension();
+
+                    $location = $imagepath . '/' . $newimagename;
+                    $imageurl = $path . '/' . $newimagename; //for DB
+                    makedirectory($path);
+                    $response = compressImage(['source' => $image, 'destination' => $location]);
+                    if ($response != true){
+                        $image->move($imagepath, $newimagename);
+                    }
+                }
+
+                $blogcat->image = $imageurl;
+
+            }
+
             $blogcat->save() ;
 
 
@@ -71,6 +93,31 @@ class OtherController extends Controller
         try {
 
             $BlogCategory = BlogCategory::find($id);
+
+
+            $image = $request->file('image');
+
+
+            if ($image) {
+                $path = "/photos/blogcategories";
+                $imagepath = public_path() . $path;
+                if ($image->isValid()) {
+                    $newimagename = rand(1, 100) . time() . '.' . $image->getClientOriginalExtension();
+
+                    $location = $imagepath . '/' . $newimagename;
+                    $imageurl = $path . '/' . $newimagename; //for DB
+                    makedirectory($path);
+                 //   deleteimage(public_path($BlogCategory->image));
+                    $response =   compressImage(['source' => $image, 'destination' => $location]);
+                    if ($response != true){
+                        $image->move($imagepath, $newimagename);
+                    }
+                }
+
+                $BlogCategory->image = $imageurl;
+
+            }
+            $BlogCategory->save();
 
 # end step 1_________________________;
             $blogcategory_content = DB::table('blogcategory_contents')->where('base_id', $id)->get();

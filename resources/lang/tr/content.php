@@ -29,6 +29,7 @@ return
         'servicesContent' => 'Müdaxilə Fiziki Terapiya, Müdaxilə Fiziologiyası və Yeniləyici Tibb Doktoru Askin Nasırcıların ixtisaslaşması və müalicə üsulları.',
         'Contact Information' => 'Əlaqə məlumatı',
         'Get in Touch With Us' => 'Bizimlə əlaqə qurun',
+        'You have a question for us?' => 'Bizə Sualınız varsa buradan mail göndərə bilərsiniz',
         'contactInformContent' => 'Bizimlə əlaqə qurun Bizimlə əlaqə qurun Bizimlə əlaqə qurun',
         'First Name'=> 'Ad',
         'Last Name'=> 'Soyad',
@@ -37,6 +38,7 @@ return
         'Message'=> 'Mesaj',
         'Send'=> 'Göndər',
         'workstime'=> 'İş Vaxtları',
+        "workDays" => 'Bazar Ertəsi - Bazar',
         'workinghourstart'=> 'İş Saatı (Başlama)',
         'workinghourend'=> 'İş Saatı (Bitmə)',
     ];

@@ -31,12 +31,6 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="{{route('gallery')}}"
-                       aria-expanded="false"><i  class=" fas fa-images"></i><span
-                            class="hide-menu">Qaleriya</span>
-                    </a>
-                </li>
 
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="{{route('admincontact')}}"
@@ -44,12 +38,7 @@
                             class="hide-menu">Bizimlə Əlaqə</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="{{route('adminpress')}}"
-                       aria-expanded="false"><i  class=" far fa-newspaper"></i><span
-                            class="hide-menu">Mətbuatda Biz</span>
-                    </a>
-                </li>
+
 
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="{{route('adminfaq')}}"

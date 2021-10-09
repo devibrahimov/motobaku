@@ -14,14 +14,22 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
     function adjustment(){
         $adjustment = \App\Models\Adjustment::first();
-        if ($adjustment != null){
-            return $adjustment;
-        }else{
+        if (!isset($adjustment)){
             return  (object) [
                 'multilang' => 0,
                 'default_lang' => 'az',
                 'models' => null
             ];
+        }else{
+            if ($adjustment != null){
+                return $adjustment;
+            }else{
+                return  (object) [
+                    'multilang' => 0,
+                    'default_lang' => 'az',
+                    'models' => null
+                ];
+            }
         }
     }
 
@@ -126,9 +134,9 @@ function makedirectory($dirpath){
     //echo $path ;
 }
 
-function deleteimage($imagepath ){
+function deleteimage($imagepath){
     if(file_exists($imagepath)){
-        unlink($imagepath );
+        unlink($imagepath);
     }
 }
 

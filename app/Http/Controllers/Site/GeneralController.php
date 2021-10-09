@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Carousel;
-use App\Models\Gallery;
 use App\Models\Message;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
@@ -41,13 +40,11 @@ class GeneralController extends Controller
             ->leftjoin('faq_contents','faqs.id','=','faq_contents.faq_id')
             ->orderBy('faq_id','DESC')->where('lang',$locale)->take(6,1)->get();
 
-        $press = DB::table('press')->where('athome',1)->first();
-
         $blogs = DB::table('blogs')
             ->leftjoin('blog_contents','blogs.id','=','blog_contents.blog_id')
-            ->where('lang',$locale)->take(3,1)->get();
+            ->where('lang',$locale)->take(4,1)->get();
 
-        return View::make("Template.pages.home",compact(['about','carousel','services','press','blogs','faqs']));
+        return View::make("Template.pages.home",compact(['about','carousel','services','blogs','faqs']));
     }
 
     public function about(){
@@ -80,13 +77,7 @@ class GeneralController extends Controller
 
     }
 
-    public function press(){
 
-        $press = DB::table('press')->get();
-
-        return View::make("Template.pages.press",compact(['press' ]));
-
-    }
 
     public function services(){
         if ( adjustment()->multilang == 1) {
@@ -194,11 +185,7 @@ class GeneralController extends Controller
         return View::make("Template.pages.contact" );
     }
 
-    public function gallery(){
-        $gallery = Gallery::all();
-        return View::make("Template.pages.gallery",compact(['gallery']));
 
-    }
 
 
     public function sendmessage(Request $request){

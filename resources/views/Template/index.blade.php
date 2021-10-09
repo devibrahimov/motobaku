@@ -2,245 +2,369 @@
 <html lang="@if ( adjustment()->multilang == 1) {{LaravelLocalization::getCurrentLocale()}}  @endif
 @if ( adjustment()->multilang == 0)  {{adjustment()->default_lang}}  @endif">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="@if(isset($meta_content)) {{$meta_content}} @else {{setting()->meta_content}} @endif">
     <meta name="keywords" content="@if(isset($meta_keywords)) {{$meta_keywords}} @else {{setting()->meta_keywords}} @endif">
     <meta name="author" content="https://lumusoft.com">
-
     {!! setting()->any_meta_tags !!}
-
+    {!! setting()->g_analytcs_script !!}
     <link href="{{setting()->favicon}} " rel="icon">
     <title> {{setting()->title}}  </title>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Roboto:wght@400;700&amp;display=swap">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
-    <link rel="stylesheet" href="/template/css/libraries.css">
-    <link rel="stylesheet" href="/template/css/style.css?v={{rand(0,999999)}}">
+    <!-- animate -->
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <!-- Slick -->
+    <link rel="stylesheet" href="/assets/css/slick.css" />
+    <link rel="stylesheet" href="/assets/css/slick-theme.css" />
+    <!-- swiper -->
+    <link rel="stylesheet" href="/assets/css/swiper.min.css" />
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <!-- flaticon -->
+    <link rel="stylesheet" href="/assets/css/flaticon.css">
+    <!-- flagicon -->
     <link rel="stylesheet" href="/general/flag/css/flag-icon.min.css">
-    {!! setting()->g_analytcs_script !!}
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/style.css?v={{rand(0,999999)}}">
+    <!-- responsive Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/responsive.css?v={{rand(0,999999)}}">
     @yield('css')
 </head>
-
 <body>
-<div class="wrapper">
-    <div class="preloader">
-        <div class="loading"><span></span><span></span><span></span><span></span></div>
-    </div><!-- /.preloader -->
 
-    <header class="header header-layout2">
-        <div class="header-topbar">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <ul class="contact__list d-flex flex-wrap align-items-center list-unstyled mb-0">
-                                <li>
-                                    <i class="icon-phone"></i><a href="tel:{{contact()->number}}">{{__('content.number')}}: {{contact()->number}}</a>
-                                </li>
-                                <li>
-                                    <i class="icon-location"></i><a href="#">{{contact()->address}}</a>
-                                </li>
-                                <li>
-                                    <i class="icon-clock"></i><a href="{{route('site.contact')}}">
-                                    {{__('content.workstime')}}: <span>{{contact()->workinghourstart}}</span> -  <span>{{contact()->workinghourend}}</span></a>
-                                </li>
-                            </ul><!-- /.contact__list -->
-                            <div class="d-flex">
-                                <ul class="social-icons list-unstyled mb-0 mr-30">
-                                    @if(contact()->facebook != null)
-                                    <li><a href="{{contact()->facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                   @endif
-                                    @if(contact()->linkedin != null)
-                                    <li><a href="{{contact()->linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                                   @endif
-                                    @if(contact()->instagram != null)
-                                    <li><a href="{{contact()->instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                   @endif
-                                    @if(contact()->youtube != null)
-                                    <li><a href="{{contact()->youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                                   @endif
+{{--<!-- preloader area start -->--}}
+{{--<div class="preloader" id="preloader">--}}
+{{--    <div class="preloader-inner">--}}
+{{--        <div class="spinner">--}}
+{{--            <div class="dot1"></div>--}}
+{{--            <div class="dot2"></div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+{{--<!-- preloader area end -->--}}
 
+<!-- search Popup -->
+<div class="body-overlay" id="body-overlay"></div>
+<div class="search-popup" id="search-popup">
+    <form action="#" class="search-form">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search.....">
+        </div>
+        <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<!-- //. search Popup -->
 
-                                </ul><!-- /.social-icons -->
-                                @if(adjustment()->multilang == 1)
-                                    <div class="dropdown lang-dropdown"  >
-                                        <button class="dropdown-toggle lang-dropdown-toggle" id="langDropdown" data-toggle="dropdown">
-                                            <i class="flag-icon flag-icon-squared  flag-icon-{{ LaravelLocalization::getCurrentLocale() }}" style=" border-radius: 50%;"> </i>
-{{--                                            {{ LaravelLocalization::getCurrentLocaleNative() }}--}}
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="langDropdown">
-                                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                                @if(controlhaslang($localeCode) == true)
-                                                    <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                        <i class="flag-icon flag-icon-squared  flag-icon-{{ $localeCode }}" style=" border-radius: 50%;"> </i>
-{{--                                                        {{ $properties['native'] }}--}}
-                                                    </a>
-                                                @endif
-                                            @endforeach
-                                        </div>
+<div class="info-popup">
+    <div class="info-popup-content">
+        <button type="button" class="info-popup-content_close">X</button>
+        <div class="row no-gutters">
+            <div class="col-xl-7 col-12 col-sm-6">
+                <div class="info-popup-content__img info-popup-content__img--one"></div>
+            </div>
+            <div class="col-xl-5 col-12 col-sm-6">
+                <div class="info-popup-content__text">
+                    <div class="info-popup-content__text-header">
+                        <h3 class="info-popup-content__title">{{__('content.workstime')}}</h3>
+                    </div>
+                    <div class="info-popup-content__text-body">
+                        <span class="info-popup-content__text-is">{{__('content.workDays')}}</span>
+                        <span class="info-popup-content__text-is">{{contact()->workinghourstart}} - {{contact()->workinghourend}}</span>
+                    </div>
+                    <div class="info-popup-content__text-footer">
+                        <span class="info-popup-content__text-is"> {{contact()->number}}</span>
+                        <span class="info-popup-content__text-is"> {{contact()->phone}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--info-popup-->
+
+<div class="location-popup">
+    <div class="location-popup-content">
+        <button type="button" class="message-popup-content_close">X</button>
+        <div class="row no-gutters">
+            <div class="col-lg-7 col-12 col-sm-6">
+                <div class="mapouter2">
+                    <div class="gmap_canvas2">
+                        {{--<iframe width="100%" height="100%" id="gmap_canvas2" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>--}}
+                        {!! contact()->googlemap !!}
+                        <a href="https://www.embedgooglemap.net/blog/elementor-pro-discount-code-review/">elementor review</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12 col-sm-6">
+                <div class="location-popup-content__text">
+                    <div class="location-popup-content__text-header">
+                        <h3 class="location-popup-content__title">{{__('content.address')}}</h3>
+                    </div>
+                    <div class="location-popup-content__text-body">
+                            <span class="location-popup-content__text-is">
+                              {{contact()->address}}
+                            </span>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="#" class="btn btn-element btn-normal btn-gray">{{__('content.goto')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--location-popup-->
+
+<div class="message-popup">
+    <div class="message-popup-content">
+        <button type="button" class="message-popup-content_close">X</button>
+        <div class="row no-gutters">
+            <div class="col-lg-7 col-12 col-sm-6">
+                <div class="message-popup-content__text text-left pl-5">
+                    <div class="message-popup-content__text-header">
+                        <h3 class="message-popup-content__title mb-3">
+                            {{__('content.You have a question for us?')}}
+                        </h3>
+                    </div>
+                    <div class="message-popup-content__text-body">
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-12 margin-top-20">
+                                    <input type="text" placeholder="{{__('content.Email')}}" class="contact-form__input"/>
+                                </div>
+                                <div class="col-12 margin-top-20">
+                                    <textarea name="Message" placeholder="{{__('content.Message')}}" class="contact-form__textarea" cols="30" rows="2" ></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="btn-wrapper desktop-center margin-top-30">
+                                        <a href="#" class="btn btn-element btn-lg btn-red">{{__('content.Send')}}</a>
                                     </div>
-                                @endif
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12 col-sm-6">
+                <div class="message-popup-content__img message-popup-content__img--three"></div>
+            </div>
+        </div>
+    </div>
+</div><!--message-popup-->
+
+
+<!-- navbar start -->
+<div class="billa-navbar">
+    <nav class="navbar navbar-area navbar-expand-lg nav-style-01">
+        <div class="container nav-container">
+            <div class="responsive-mobile-menu">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#billatrail_main_menu"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </button>
+            </div>
+            <div class="logo">
+                <a href="{{route('site.index')}}"> <img src="{{setting()->logo}}" alt="logo" width="220px" ></a>
+            </div>
+            <div class="collapse navbar-collapse" id="billatrail_main_menu">
+                <ul class="navbar-nav">
+                    <li class="current-menu-item"><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
+                    <li><a href="{{route('site.about')}}">{{__('content.about')}}</a></li>
+                    <li><a href="{{route('site.faq')}}">{{__('content.faq')}}</a></li>
+                    <li><a href="#">Məhsullar</a></li>
+                    <li class="menu-item-has-children">
+                        <a href="#">{{__('content.courses')}}</a>
+                        <ul class="sub-menu">
+                            @foreach(allServices() as $service)
+                                <li>
+                                    <a href="{{route('site.serviceDetail',['id'=> $service->service_id,'slug'=>\Illuminate\Support\Str::slug($service->name)])}}" >{{$service->name}}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li><a href="{{route('site.blogs')}}">{{__('content.blogs')}}</a></li>
+                    <li><a href="{{route('site.contact')}}">{{__('content.contact')}}</a></li>
+                </ul>
+            </div>
+            <div class="nav-right-content">
+                <ul class="nav-right-menu">
+                    <li class="search" id="search">
+                        <i class="fa fa-search"></i>
+                    </li>
+                    @if(adjustment()->multilang == 1)
+                        <li class="dropdown lang-dropdown"  >
+                            <span class="dropdown-toggle lang-dropdown-toggle" id="langDropdown" data-toggle="dropdown">
+                                <i class="flag-icon flag-icon-squared  flag-icon-{{ LaravelLocalization::getCurrentLocale() }}" style=" border-radius: 50%;"> </i>
+                                {{--                                            {{ LaravelLocalization::getCurrentLocaleNative() }}--}}
+                            </span>
+                            <div class="dropdown-menu" aria-labelledby="langDropdown">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @if(controlhaslang($localeCode) == true)
+                                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            <i class="flag-icon flag-icon-squared  flag-icon-{{ $localeCode }}" style=" border-radius: 50%;"> </i>
+                                            {{--                                                        {{ $properties['native'] }}--}}
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </li>
+                    @endif
+                    <li>
+                        <div class="humberger-wrapper d-none d-lg-block">
+                            <div role="navigation" class="humberger-menu">
+                                <div id="menuToggle">
+                                    <input type="checkbox" />
+                                    <span></span>
+                                    <span class="second"></span>
+                                    <span></span>
+
+                                    <ul id="menu">
+                                        <li><a href="signin.html">Sign In</a></li>
+                                        <li><a href="signup.html">Sign Up</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div><!-- /.col-12 -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.header-top -->
-        <nav class="navbar navbar-expand-lg sticky-navbar">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{route('site.index')}}">
-                    <img src="{{setting()->logo}} " class="logo-light  p-3" alt="logo" width="220px"   >
-                    <img src="{{setting()->logo}}" class="logo-dark p-3" alt="logo" width="220px"   >
-                </a>
-                <button class="navbar-toggler" type="button">
-                    <span class="menu-lines"><span></span></span>
-                </button>
-                <div class="collapse navbar-collapse" id="mainNavigation">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav__item"><a class="nav__item-link" href="{{route('site.index')}}">{{__('content.home')}}</a></li>
-                        <li class="nav__item has-dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle nav__item-link">{{__('content.about')}}</a>
-                            <ul class="dropdown-menu">
-                                <li class="nav__item">
-                                    <a href="{{route('site.about')}}" class="nav__item-link">{{__('content.about')}}</a>
-                                </li> <!-- /.nav-item -->
-                                <li class="nav__item">
-                                    <a href="{{route('site.faq')}}" class="nav__item-link">{{__('content.s-s-s')}}</a>
-                                </li> <!-- /.nav-item -->
-                                <li class="nav__item">
-                                    <a href="{{route('site.gallery')}}" class="nav__item-link">{{__('content.gallery')}}</a>
-                                </li> <!-- /.nav-item -->
-{{--                                <li class="nav__item">--}}
-{{--                                    <a href="{{route('site.about')}}" class="nav__item-link">{{__('content.movies')}}</a>--}}
-{{--                                </li> <!-- /.nav-item -->--}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- navbar end -->
+@yield('content')
+<div class="bottom-bg"></div>
 
-                            </ul><!-- /.dropdown-menu -->
-                        </li><!-- /.nav-item -->
-                        <li class="nav__item"><a class="nav__item-link" href="{{route('site.press')}}">{{__('content.press')}}</a></li>
-                        <li class="nav__item has-dropdown">
-                            <a href="{{route('site.services')}}"   class="dropdown-toggle nav__item-link">{{__('content.services')}}</a>
-                            <ul class="dropdown-menu">
-                                @foreach(allServices() as $service)
-                                    <li class="nav__item">
-                                        <a  class="nav__item-link" href="{{route('site.serviceDetail',['id'=> $service->service_id,'slug'=>\Illuminate\Support\Str::slug($service->name)])}}" >{{$service->name}}</a>
-                                    </li>
-                                @endforeach
-
-                            </ul><!-- /.dropdown-menu -->
-                        </li><!-- /.nav-item -->
-                        <li class="nav__item"><a class="nav__item-link" href="{{route('site.blogs')}}">{{__('content.blog')}}</a></li>
-                        <li class="nav__item"><a class="nav__item-link" href="{{route('site.contact')}}">{{__('content.contact')}}</a></li>
-
-                    </ul><!-- /.navbar-nav -->
-                    <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
-                </div><!-- /.navbar-collapse -->
-
-            </div><!-- /.container -->
-        </nav><!-- /.navabr -->
-    </header><!-- /.Header -->
-
-    @yield('content')
-    <footer class="footer">
-        <div class="footer-primary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <div class="footer-widget-about">
-                            <img src="{{setting()->footer_logo}}" alt="logo" class="mb-30">
-                            <p class="color-gray">
-                                {{setting()->meta_content}}
-                            </p>
-                            <a href="{{route('site.contact')}}" class="btn btn__primary btn__primary-style2 btn__link">
-                                <span>{{__('content.contact')}}</span> <i class="icon-arrow-right"></i>
+<!-- footer area start -->
+<footer class="footer-area footer-style-2">
+    <div class="footer-top padding-top-40 padding-bottom-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2">
+                    <div class="footer-widget widget">
+                        <div class="about_us_widget">
+                            <a href="index.html" class="footer-logo">
+                                <img src="{{setting()->logo}}" alt="{{setting()->title}} logo" width="220px" >
                             </a>
-                        </div><!-- /.footer-widget__content -->
-                    </div><!-- /.col-xl-2 -->
-                    <div class="col-sm-6 col-md-6 col-lg-2 offset-lg-1">
-                        <div class="footer-widget-nav">
-
-                            <h6 class="footer-widget__title">{{__('content.services')}}</h6>
-                            <nav>
-                                <ul class="list-unstyled">
-                                    @foreach(allServices() as $service)
-                                    <li><a href="{{route('site.serviceDetail',['id'=> $service->service_id,'slug'=>\Illuminate\Support\Str::slug($service->name)])}}">{{$service->name}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </nav>
-                        </div><!-- /.footer-widget__content -->
-                    </div><!-- /.col-lg-2 -->
-                    <div class="col-sm-6 col-md-6 col-lg-2">
-                        <div class="footer-widget-nav">
-                            <h6 class="footer-widget__title">{{__('content.menu')}}</h6>
-                            <nav>
-                                <ul class="list-unstyled">
-                                    <li><a href="{{route('site.about')}}">{{__('content.about')}}</a></li>
-                                    <li><a href="{{route('site.services')}}">{{__('content.services')}}</a></li>
-                                    <li><a href="{{route('site.faq')}}">{{__('content.s-s-s')}}</a> </li>
-                                    <li><a href="{{route('site.gallery')}}">{{__('content.gallery')}}</a> </li>
-                                    <li><a href="{{route('site.press')}}">{{__('content.press')}}</a></li>
-                                    <li><a href="{{route('site.blogs')}}">{{__('content.blog')}}</a></li>
-                                    <li><a href="{{route('site.contact')}}">{{__('content.contact')}}</a></li>
-                                </ul>
-                            </nav>
-                        </div><!-- /.footer-widget__content -->
-                    </div><!-- /.col-lg-2 -->
-                    <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="footer-widget-contact">
-                            <h6 class="footer-widget__title color-heading">{{__('content.Get in Touch With Us')}}</h6>
-                            <ul class="contact-list list-unstyled">
-                                <li>{{__('content.contactInformContent')}}</li>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-6">
+                    <div class="footer-widget widget widget_nav_menu">
+                        <ul>
+                            <li class="current-menu-item"><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
+                            <li><a href="{{route('site.about')}}">{{__('content.about')}}</a></li>
+                            <li><a href="{{route('site.faq')}}">{{__('content.faq')}}</a></li>
+                            <li><a href="#">Məhsullar</a></li>
+                            <li><a href="{{route('site.blogs')}}">{{__('content.blogs')}}</a></li>
+                            <li><a href="{{route('site.contact')}}">{{__('content.contact')}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="footer-widget widget widget_nav_menu">
+                        <ul>
+                            @if(contact()->facebook != null)
                                 <li>
-                                    <a href="tel:{{contact()->number}}" class="phone__number">
-                                        <i class="icon-phone"></i> <span>{{contact()->number}}</span>
+                                    <a class="icon-text" href="{{contact()->facebook}}" target="_blank">
+                                        <i class="fa fa-facebook-f"></i>
                                     </a>
                                 </li>
-                                <li class="color-body">{{contact()->address}}</li>
-                            </ul>
-                            <div class="d-flex align-items-center">
-                                <a href="contact-us.html" class="btn btn__primary btn__link mr-30">
-                                    <i class="icon-arrow-right"></i> <span>{{__('content.Contact Information')}}</span>
-                                </a>
-                                <ul class="social-icons list-unstyled mb-0">
-                                  @if(contact()->facebook != null)   <li><a  href="{{contact()->facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>  @endif
-                                   @if(contact()->linkedin != null)  <li><a  href="{{contact()->linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>    @endif
-                                   @if(contact()->instagram != null)   <li><a  href="{{contact()->instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>  @endif
-                                   @if(contact()->youtube != null)   <li><a  href="{{contact()->youtube}}" target="_blank"><i class="fab fa-youtube"></i></a></li>   @endif
+                            @endif
+                            @if(contact()->linkedin != null)
+                                <li>
+                                    <a class="icon-text" href="{{contact()->linkedin}}" target="_blank">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(contact()->instagram != null)
+                                <li>
+                                    <a class="icon-text" href="{{contact()->instagram}}" target="_blank">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(contact()->youtube != null)
+                                <li>
+                                    <a class="icon-text" href="{{contact()->youtube}}" target="_blank">
+                                        <i class="fa fa-youtube"></i>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-area-inner">
+                        © 2021 All rights reserved. Powered with <i class="fa fa-heart"></i> by <a href="http://lumusoft.com/" target="_blank">Lumusoft</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer area end -->
 
-                                </ul><!-- /.social-icons -->
-                            </div>
-                        </div><!-- /.footer-widget__content -->
-                    </div><!-- /.col-lg-2 -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.footer-primary -->
-        <div class="footer-secondary">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-sm-12 col-md-6 col-lg-6">
-                        <span class="fz-14">&copy; 2020 Bütün Huquqları Qorunur</span>
-                    </div><!-- /.col-lg-6 -->
+<!-- back to top area start -->
+<div class="back-to-top">
+    <span class="back-top"><i class="fa fa-angle-up"></i></span>
+</div>
+<!-- back to top area end -->
 
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.footer-secondary -->
-    </footer><!-- /.Footer -->
-    <div class="search-popup">
-        <button type="button" class="search-popup__close"><i class="fas fa-times"></i></button>
-        <form class="search-popup__form">
-            <input type="text" class="search-popup__form__input" placeholder="Type Words Then Enter">
-            <button class="search-popup__btn"><i class="icon-search"></i></button>
-        </form>
-    </div><!-- /. search-popup -->
-    <button id="scrollTopBtn"><i class="fas fa-long-arrow-alt-up"></i></button>
-</div><!-- /.wrapper -->
-{!! setting()->whatsapp_script !!}
-{!! setting()->chat_script !!}
-<script src="/template/js/jquery-3.5.1.min.js"></script>
-<script src="/template/js/plugins.js"></script>
-<script src="/template/js/main.js"></script>
-@yield('js')
+<!-- jquery -->
+<script src="/assets/js/jquery-2.2.4.min.js"></script>
+<!-- popper -->
+<script src="/assets/js/popper.min.js"></script>
+<!-- bootstrap -->
+<script src="/assets/js/bootstrap.min.js"></script>
+<!-- magnific popup -->
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<!-- wow -->
+<script src="/assets/js/wow.min.js"></script>
+<!-- nice select -->
+<script src="/assets/js/nice-select.js"></script>
+<!-- owl carousel -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+<!-- Slick -->
+<script src="/assets/js/slick.min.js"></script>
+<!-- Slick Animation -->
+<script src="/assets/js/slick-animation.js"></script>
+<!-- swiper -->
+<script src="/assets/js/swiper.min.js"></script>
+<!-- waypoint -->
+<script src="/assets/js/waypoints.min.js"></script>
+<!-- validate -->
+<script src="/assets/js/jquery.validate.min.js"></script>
+<!-- counterup -->
+<script src="/assets/js/jquery.counterup.min.js"></script>
+<!-- imageloaded -->
+<script src="/assets/js/imagesloaded.pkgd.min.js"></script>
+<!-- isotope -->
+<script src="/assets/js/isotope.pkgd.min.js"></script>
+<!-- rProgressbar -->
+<script src="/assets/js/jQuery.rProgressbar.min.js"></script>
+<!-- contact form -->
+<script src="/assets/js/contact.js"></script>
+<!-- main js -->
+<script src="/assets/js/script.js"></script>
+<script src="/assets/js/main.js"></script>
 
 </body>
 </html>

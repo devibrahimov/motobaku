@@ -60,8 +60,17 @@
                                                     </a>
                                                 </div>
 
-                                                <form class="pl-3 pr-3" action="{{route('blog_category_update',$item->id)}}" method="post" >
+                                                <form class="pl-3 pr-3" action="{{route('blog_category_update',$item->id)}}" method="post" enctype="multipart/form-data" >
                                                   @csrf
+                                                    <div class="form-group">
+                                                        <span> <img  src="{{$item->image}}" alt=""  height="100"></span>
+                                                        <label for="">Şəkil</label>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="image" accept="image/jpeg ,image/png " id="inputGroupFile01">
+                                                            <label class="custom-file-label" for="inputGroupFile01">Şəkil seçin</label>
+                                                        </div>
+                                                    </div>
+
                                                     @foreach(languages() as $lang)
                                                     <div class="form-group">
                                                         <label>Başlıq ({{$lang->name}})</label>
@@ -74,7 +83,6 @@
                                                     </div>
 
                                                 </form>
-
                                             </div>
                                         </div><!-- /.modal-content -->
                                     </div><!-- /.modal-dialog -->
@@ -106,8 +114,15 @@
                         </a>
                     </div>
 
-                    <form class="pl-3 pr-3" action="{{route('blog_categories')}}" method="post">
+                    <form class="pl-3 pr-3" action="{{route('blog_categories')}}" method="post" enctype="multipart/form-data" >
 
+                        <div class="form-group">
+                            <label for="">Şəkil</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" required name="image" accept="image/jpeg ,image/png " id="inputGroupFile01">
+                                <label class="custom-file-label" for="inputGroupFile01">Şəkil seçin</label>
+                            </div>
+                        </div>
                         @csrf
                         @foreach(languages() as $lang)
                         <div class="form-group">

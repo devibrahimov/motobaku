@@ -45,9 +45,9 @@
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h2 class="text-dark mb-1 font-weight-medium">{{\Illuminate\Support\Facades\DB::table('press')->count()}}</h2>
+                                <h2 class="text-dark mb-1 font-weight-medium">123</h2>
                                 </div>
-                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Mətbuat xəbəri</h6>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Məhsullar</h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
                             <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
-                            <h2 class="text-dark mb-1 font-weight-medium">{{\Illuminate\Support\Facades\DB::table('press')->count()}}</h2>
+                            <h2 class="text-dark mb-1 font-weight-medium">{{\Illuminate\Support\Facades\DB::table('message')->count()}}</h2>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Mesaj</h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
@@ -169,21 +169,23 @@
                                 <span class="mb-0 font-12 text-primary font-weight-medium">AZN</span>
                             </div>
                         </div>
-                        @foreach ($currencies->ValType[1]  as $cur)
-                            <div class="row  align-items-center mt-1 border-right">
-                                <div class="col-2 text-right">
-                                    <span class="text-muted font-10">  {{$cur->Nominal}} </span>
-                                </div>
+                        @if(isset($currencies))
+                            @foreach ($currencies->ValType[1]  as $cur)
+                                <div class="row  align-items-center mt-1 border-right">
+                                    <div class="col-2 text-right">
+                                        <span class="text-muted font-10">  {{$cur->Nominal}} </span>
+                                    </div>
 
-                                <div class="col-7 text-left">
-                                    <span class="text-muted font-12"> {{$cur->Name}}</span>
-                                </div>
+                                    <div class="col-7 text-left">
+                                        <span class="text-muted font-12"> {{$cur->Name}}</span>
+                                    </div>
 
-                                <div class="col-3 text-right">
-                                    <span class="mb-0 font-12 text-dark font-weight-medium">{{$cur->Value}}</span>
+                                    <div class="col-3 text-right">
+                                        <span class="mb-0 font-12 text-dark font-weight-medium">{{$cur->Value}}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @endif
 
                     </div>
                 </div>
