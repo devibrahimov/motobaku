@@ -124,7 +124,7 @@ class GeneralController extends Controller
 
         $blogs = DB::table('blogs')
             ->leftjoin('blog_contents','blogs.id','=','blog_contents.blog_id')
-            ->where('lang',$locale)->paginate(5);
+            ->where('lang',$locale)->paginate(4);
         $randblogs = DB::table('blogs')
             ->leftjoin('blog_contents','blogs.id','=','blog_contents.blog_id')
             ->where('lang',$locale)->inRandomOrder()->get();
@@ -146,7 +146,7 @@ class GeneralController extends Controller
 
         $blogs = DB::table('blogs')
             ->leftjoin('blog_contents','blogs.id','=','blog_contents.blog_id')
-            ->where('lang',$locale)->where('category',$id)->paginate(5);
+            ->where('lang',$locale)->where('category',$id)->paginate(4);
         $randblogs = DB::table('blogs')
             ->leftjoin('blog_contents','blogs.id','=','blog_contents.blog_id')
             ->where('lang',$locale)->inRandomOrder()->get();

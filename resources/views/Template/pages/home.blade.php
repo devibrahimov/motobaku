@@ -351,8 +351,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="content">
-                        <h1>Featured Tours</h1>
-                        <span>It is a long established fact that a reader will be distracted by</span>
+                        <h1>{{__('content.blogs')}}</h1>
+                        <span>{{__('content.blogsheaderContent')}}</span>
                     </div>
                 </div>
             </div>
@@ -418,18 +418,21 @@
                 <div class="col-lg-7">
                     <div class="contact-right">
                         <div class="form-group">
-                            <form class="contact-form form" action="#">
+                            <form class="contact-form form" method="post" action="{{route('sendmessage')}}">
                                 <div class="form-field margin-top-30 margin-bottom-30">
-                                    <input name="firstname" id="name" type="text" placeholder="Your name" class="input-form"/>
+                                    <input name="name"maxlength="50"  type="text" placeholder="{{__('content.First Name')}} (*)" class="input-form"/>
                                 </div>
                                 <div class="form-field margin-top-30 margin-bottom-30">
-                                    <input id="email" type="email" placeholder="santa@gmail.com" class="input-form" data-required="text" data-required-email="email" name="email"/>
+                                    <input name="surname"  maxlength="50" type="text" placeholder="{{__('content.Last Name')}} (*)" class="input-form"/>
+                                </div>  @csrf
+                                <div class="form-field margin-top-30 margin-bottom-30">
+                                    <input id="number" type="text"maxlength="50" class="input-form" name="number" placeholder="{{__('content.Phone Number')}} (*)" />
                                 </div>
                                 <div class="form-field margin-top-30 margin-bottom-30">
-                                    <input name="subject" id="subject" type="text" placeholder="Subject" class="input-form"/>
+                                    <input id="email" type="email"maxlength="50" class="input-form"  name="email" placeholder="{{__('content.Email')}} (*)"/>
                                 </div>
                                 <div class="form-field margin-top-30 margin-bottom-30">
-                                    <textarea name="message" id="thought" cols="30" rows="5" placeholder="Message"></textarea>
+                                    <textarea name="message" id="thought" cols="30" rows="5" placeholder="{{__('content.Message')}} (*)"></textarea>
                                 </div>
                                 <div class="btn-wrapper desktop-right">
                                     <button type="submit" class="btn sm-btn">{{__('content.Send')}}</button>

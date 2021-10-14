@@ -1,6 +1,7 @@
 @extends('Template.index')
 
 @section('css')
+
 @endsection
 
 
@@ -23,30 +24,17 @@
         <div class="container">
             <div class="row">
                 <div class="blog-slider1">
+
+                    @foreach($categories as $cat)
                     <div class="single-item">
-                        <img src="/assets/img/blog/top-slider1.png" alt="">
+                        <a href="{{route('site.blogcat',['id'=>$cat->base_id ,'slug'=>\Illuminate\Support\Str::slug($cat->name)])}}">
+                        <img src="{{$cat->image}}" alt="{{setting()->title}} - {{$cat->name}} ">
                         <div class="slider-content">
-                            <a>Lorem ipsum dolor sit ame</a>
+                            <a href="{{route('site.blogcat',['id'=>$cat->base_id ,'slug'=>\Illuminate\Support\Str::slug($cat->name)])}}">{{$cat->name}}</a>
                         </div>
+                        </a>
                     </div>
-                    <div class="single-item">
-                        <img src="/assets/img/blog/top-slider2.png" alt="">
-                        <div class="slider-content">
-                            <a>Lorem ipsum dolor sit ame</a>
-                        </div>
-                    </div>
-                    <div class="single-item">
-                        <img src="/assets/img/blog/top-slider3.png" alt="">
-                        <div class="slider-content">
-                            <a>Lorem ipsum dolor sit ame</a>
-                        </div>
-                    </div>
-                    <div class="single-item">
-                        <img src="/assets/img/blog/top-slider1.png" alt="">
-                        <div class="slider-content">
-                            <a>Lorem ipsum dolor sit ame</a>
-                        </div>
-                    </div>
+                     @endforeach
                 </div>
             </div>
         </div>
@@ -100,192 +88,93 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12">
                     <div class="blog-left-content">
-                        <div class="img-item row margin-bottom-30">
-                            <div class="col-md-6">
-                                <div class="row h-100">
-                                    <div class="blog-thumb d-flex">
-                                        <img src="/assets/img/blog/image-item1.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content">
-                                    <h4>Biking, May 1, 2019</h4>
-                                    <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique.</p>
-                                    <ul class="post-meta">
-                                        <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                    </ul>
-                                    <div class="btn-wrapper desktop-left">
-                                        <a href="blog-details.html" class="btn btn-element btn-normal btn-red">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img-item row margin-bottom-30">
-                            <div class="col-md-6">
-                                <div class="row h-100">
-                                    <div class="blog-thumb d-flex">
-                                        <img src="/assets/img/blog/image-item2.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content">
-                                    <h4>Biking, May 1, 2019</h4>
-                                    <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique.</p>
-                                    <ul class="post-meta">
-                                        <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                    </ul>
-                                    <div class="btn-wrapper desktop-left">
-                                        <a href="blog-details.html" class="btn btn-element btn-normal btn-red">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="img-item row margin-bottom-30">
-                            <div class="col-md-6">
-                                <div class="row h-100">
-                                    <div class="blog-thumb d-flex">
-                                        <img src="/assets/img/blog/image-item1.png" alt="">
+                        @if(isset($blogs))
+                            @foreach($blogs as $b)
+                                <div class="img-item row margin-bottom-30">
+                                    <div class="col-md-6">
+                                        <div class="row h-100">
+                                            <div class="blog-thumb d-flex">
+                                                <img src="{{$b->image}}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="content">
+                                            <h4>@if(isset(getblogcategorycontent($b->category,LaravelLocalization::getCurrentLocale())->name))
+
+                                                    <a href="{{route('site.blogcat',['id'=>$b->category ,'slug'=>\Illuminate\Support\Str::slug(getblogcategorycontent($b->category,LaravelLocalization::getCurrentLocale())->name)])}}">
+                                                        {{getblogcategorycontent($b->category,LaravelLocalization::getCurrentLocale())->name}}
+                                                    </a>
+                                                @endif
+                                                ,  {{ $b->created_at }}</h4>
+                                            <span class="text"> {{$b->name}}</span>
+                                            <p>{!! mb_substr( strip_tags(html_entity_decode($b->content)),0,250 ) !!} ...</p>
+                                            <ul class="post-meta">
+                                                <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>
+                                                <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
+                                            </ul>
+                                            <div class="btn-wrapper desktop-left">
+                                                <a href="{{route('site.blogdetail',['id'=>$b->blog_id ,'slug'=>\Illuminate\Support\Str::slug($b->name)])}}"
+                                                   class="btn btn-element btn-normal btn-red">{{__('content.readmore')}}</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content">
-                                    <h4>Biking, May 1, 2019</h4>
-                                    <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique.</p>
-                                    <ul class="post-meta">
-                                        <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                    </ul>
-                                    <div class="btn-wrapper desktop-left">
-                                        <a href="blog-details.html" class="btn btn-element btn-normal btn-red">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="img-item row margin-bottom-30">
-                            <div class="col-md-6">
-                                <div class="row h-100">
-                                    <div class="blog-thumb d-flex">
-                                        <img src="/assets/img/blog/image-item2.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="content">
-                                    <h4>Biking, May 1, 2019</h4>
-                                    <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique.</p>
-                                    <ul class="post-meta">
-                                        <li><a href="#"><i class="fa fa-comments"></i> 1200 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                    </ul>
-                                    <div class="btn-wrapper desktop-left">
-                                        <a href="blog-details.html" class="btn btn-element btn-normal btn-red">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
+                    {{-- end blog contents list--}}
+
+
                     <div class="blog-pagination margin-top-55">
-                        <ul>
-                            <li>
-                                <span class="page-bumber">1</span>
-                            </li>
-                            <li>
-                                <span class="page-bumber">2</span>
-                            </li>
-                            <li>
-                                <span class="page-bumber">3</span>
-                            </li>
-                            <li>
-                                <span class="page-bumber">4</span>
-                            </li>
-                            <li>
-                                <span class="page-bumber">5</span>
-                            </li>
-                            <li>
-                                <span class="next page-bumber"><i class="fa fa-long-arrow-right"></i></span>
-                            </li>
-                        </ul>
+                        {!! $blogs->links()!!}
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="blog-right-content">
 
-                        <h1>Most Shared</h1>
+                        <h1>{{__('content.blogs')}}</h1>
+
+                        @if(isset($randblogs))
+                            @foreach($randblogs as $rb)
                         <div class="share-img-item">
                             <div class="img-part">
-                                <a href="blog-details.html"><img src="/assets/img/blog/share1.png" alt=""></a>
+                                <a href="{{route('site.blogdetail',['id'=>$rb->blog_id ,'slug'=>\Illuminate\Support\Str::slug($rb->name)])}}"><img src="{{$rb->image}}" alt=""></a>
                             </div>
                             <div class="content-part">
-                                <h4>Biking</h4>
-                                <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                                <h4 class="text-truncate">{{$rb->name}}</h4>
+                                <span class="text">{!! mb_substr( strip_tags(html_entity_decode($rb->content)),0,100) !!} ...</span>
                                 <ul class="post-meta">
-                                    <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
+                                    <li><div class="btn-wrapper desktop-left">
+                                            <a href="{{route('site.blogdetail',['id'=>$rb->blog_id ,'slug'=>\Illuminate\Support\Str::slug($rb->name)])}}"
+                                               class="btn btn-element btn-small btn-sm btn-red">{{__('content.readmore')}}</a>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="share-img-item">
-                            <div class="img-part">
-                                <a href="blog-details.html"><img src="/assets/img/blog/share2.png" alt=""></a>
-                            </div>
-                            <div class="content-part">
-                                <h4>Biking</h4>
-                                <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                <ul class="post-meta">
-                                    <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="share-img-item">
-                            <div class="img-part">
-                                <a href="blog-details.html"><img src="/assets/img/blog/share3.png" alt=""></a>
-                            </div>
-                            <div class="content-part">
-                                <h4>Biking</h4>
-                                <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                <ul class="post-meta">
-                                    <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="share-img-item">
-                            <div class="img-part">
-                                <a href="blog-details.html"><img src="/assets/img/blog/share4.png" alt=""></a>
-                            </div>
-                            <div class="content-part">
-                                <h4>Biking</h4>
-                                <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
-                                <ul class="post-meta">
-                                    <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
+
                     </div>
+
 
                     <div class="blog-right-slider margin-top-30">
                         <div class="single-item">
-                            <img src="/assets/img/blog/right-slider1.png" alt="">
+                            <img src="/assets/img/product-details/big2.png" alt="">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit</p>
-                            <span>Categories</span>
+                            <span>Product 1</span>
                         </div>
                         <div class="single-item">
-                            <img src="/assets/img/blog/right-slider1.png" alt="">
+                            <img src="/assets/img/product-details/big4.png" alt="">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit</p>
-                            <span>Categories</span>
+                            <span>Product 2</span>
                         </div>
                         <div class="single-item">
-                            <img src="/assets/img/blog/right-slider1.png" alt="">
+                            <img src="/assets/img/product-details/big1.png" alt="">
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit</p>
-                            <span>Categories</span>
+                            <span>Product 3</span>
                         </div>
                     </div>
                 </div>

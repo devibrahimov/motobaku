@@ -172,8 +172,8 @@
                     <span class="bar3"></span>
                 </button>
             </div>
-            <div class="logo">
-                <a href="{{route('site.index')}}"> <img src="{{setting()->logo}}" alt="logo" width="220px" ></a>
+            <div class="logo padding-10">
+                <a href="{{route('site.index')}}"> <img src="{{setting()->logo}}" alt="logo" height="90px" ></a>
             </div>
             <div class="collapse navbar-collapse" id="billatrail_main_menu">
                 <ul class="navbar-nav">
@@ -253,8 +253,8 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="footer-widget widget">
                         <div class="about_us_widget">
-                            <a href="index.html" class="footer-logo">
-                                <img src="{{setting()->logo}}" alt="{{setting()->title}} logo" width="220px" >
+                            <a href="{{route('site.index')}}" class="footer-logo">
+                                <img src="{{setting()->logo}}" alt="{{setting()->title}} logo" height="90px" >
                             </a>
                         </div>
                     </div>

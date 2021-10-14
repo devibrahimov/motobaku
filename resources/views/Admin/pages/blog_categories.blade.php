@@ -45,7 +45,6 @@
                                     </td>
                                 </tr>
 
-
                                 <!-- Signup modal content -->
                                 <div id="edit-modal{{$item->id}}" class="modal fade" tabindex="-1" role="dialog"
                                      aria-hidden="true">

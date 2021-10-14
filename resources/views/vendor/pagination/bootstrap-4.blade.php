@@ -1,19 +1,13 @@
 @if ($paginator->hasPages())
 
-{{--    <nav>--}}
-{{--        <ul class="pagination justify-content-center">--}}
-{{--            <li><a class="current" href="#">1</a></li>--}}
-{{--            <li><a href="#">2</a></li>--}}
-{{--            <li><a href="#"><i class="icon-arrow-right"></i></a></li>--}}
-{{--        </ul>--}}
-{{--    </nav>--}}
+{{-- istifade edilen pagination --}}
 
     <nav  class="pagination-area">
         <ul class="pagination  justify-content-center">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li  aria-disabled="true" aria-label="@lang('pagination.previous')">
-                    <a   aria-hidden="true">&lsaquo;</a>
+                    <a style=" color: #e3051a!important;"  aria-hidden="true">&lsaquo;</a>
                 </li>
             @else
                 <li  >
@@ -32,7 +26,7 @@
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <li aria-current="page"><a  class="current">{{ $page }}</a></li>
+                            <li aria-current="page"><a  class="current" style=" color: #e3051a!important;" >{{ $page }}</a></li>
                         @else
                             <li><a   href="{{ $url }}">{{ $page }}</a></li>
                         @endif
@@ -47,7 +41,7 @@
                 </li>
             @else
                 <li   aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <a    aria-hidden="true">&rsaquo;</a>
+                    <a style=" color: #e3051a!important;" aria-hidden="true">&rsaquo;</a>
                 </li>
             @endif
         </ul>

@@ -49,59 +49,7 @@
 {{--                            <li><a href="#"><i class="fa fa-share-alt"></i> 120 Share</a></li>--}}
 {{--                        </ul>--}}
 
-                        <!-- comment area start -->
-                        <div class="comment-area">
-                            <ul class="comment-list">
-                                <li class="parent">
-                                    <div class="single-comment-wrap">
-                                        <div class="thumb">
-                                            <img alt="comment" src="assets/img/blog/comment1.png">
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title">William Khan</h4>
-                                            <div class="comment-content">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="children">
-                                        <li>
-                                            <div class="single-comment-wrap">
-                                                <div class="thumb">
-                                                    <img alt="comment" src="assets/img/blog/comment2.png">
-                                                </div>
-                                                <div class="content">
-                                                    <h4 class="title">Jalali khan</h4>
-                                                    <div class="comment-content">
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <div class="single-comment-wrap">
-                                        <div class="thumb">
-                                            <img alt="comment" src="assets/img/blog/comment3.png">
-                                        </div>
-                                        <div class="content">
-                                            <h4 class="title">Harvard Ali</h4>
-                                            <div class="comment-content">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
 
-                            <form action="#" class="comment-form margin-top-50">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="write comments.....">
-                                </div>
-                            </form>
-                        </div>
-                        <!-- comment area end -->
                     </div>
                 </div>
             </div>
