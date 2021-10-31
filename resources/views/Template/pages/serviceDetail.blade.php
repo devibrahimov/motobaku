@@ -17,11 +17,8 @@
         <div class="breadcrumb-slider">
 
             @foreach($otherservices as $s)
-            <div class="single-item">
-                <div class="slider-top">
-                    <span class="total">01</span>
-                    <span class="title">Paket</span>
-                </div>
+            <div class="single-item slider-top">
+
                 <div class="slider-bottom">
                     <span class="title">{{__('content.otherCourses')}}</span>
                     <h1> <a href="{{route('site.serviceDetail',['id'=> $s->service_id,'slug'=>\Illuminate\Support\Str::slug($s->name)])}}">{{$s->name}}</a> </h1>

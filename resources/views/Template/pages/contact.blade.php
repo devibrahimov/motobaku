@@ -12,8 +12,9 @@
             <h1 class="page-title">{{__('content.contact')}}</h1>
             <ul class="page-list">
                 <li><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
-            </ul>
                 <li><a href="{{route('site.contact')}}">{{__('content.contact')}}</a></li>
+            </ul>
+
         </div>
     </div>
 

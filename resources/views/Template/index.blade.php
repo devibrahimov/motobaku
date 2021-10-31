@@ -98,7 +98,7 @@
                     <div class="gmap_canvas2">
                         {{--<iframe width="100%" height="100%" id="gmap_canvas2" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>--}}
                         {!! contact()->googlemap !!}
-                        <a href="https://www.embedgooglemap.net/blog/elementor-pro-discount-code-review/">elementor review</a>
+
                     </div>
                 </div>
             </div>
@@ -160,8 +160,8 @@
 
 
 <!-- navbar start -->
-<div class="billa-navbar">
-    <nav class="navbar navbar-area navbar-expand-lg nav-style-01">
+<div class="billa-navbar" style="background-color: rgba(28,0,83,0.45)">
+    <nav class="navbar navbar-area navbar-expand-lg nav-style-01"  style="background-color: rgba(28,0,83,0.45)">
         <div class="container nav-container">
             <div class="responsive-mobile-menu">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#billatrail_main_menu"
@@ -173,9 +173,9 @@
                 </button>
             </div>
             <div class="logo padding-10">
-                <a href="{{route('site.index')}}"> <img src="{{setting()->logo}}" alt="logo" height="90px" ></a>
+                <a href="{{route('site.index')}}"> <img src="{{setting()->logo}}" alt="logo" height="40px" ></a>
             </div>
-            <div class="collapse navbar-collapse" id="billatrail_main_menu">
+            <div class="collapse navbar-collapse" id="billatrail_main_menu" style="right: 40px">
                 <ul class="navbar-nav">
                     <li class="current-menu-item"><a href="{{route('site.index')}}">{{__('content.home')}}</a></li>
                     <li><a href="{{route('site.about')}}">{{__('content.about')}}</a></li>
@@ -218,24 +218,24 @@
                             </div>
                         </li>
                     @endif
-                    <li>
-                        <div class="humberger-wrapper d-none d-lg-block">
-                            <div role="navigation" class="humberger-menu">
-                                <div id="menuToggle">
-                                    <input type="checkbox" />
-                                    <span></span>
-                                    <span class="second"></span>
-                                    <span></span>
+{{--                    <li>--}}
+{{--                        <div class="humberger-wrapper d-none d-lg-block">--}}
+{{--                            <div role="navigation" class="humberger-menu">--}}
+{{--                                <div id="menuToggle">--}}
+{{--                                    <input type="checkbox" />--}}
+{{--                                    <span></span>--}}
+{{--                                    <span class="second"></span>--}}
+{{--                                    <span></span>--}}
 
-                                    <ul id="menu">
-                                        <li><a href="signin.html">Sign In</a></li>
-                                        <li><a href="signup.html">Sign Up</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+{{--                                    <ul id="menu">--}}
+{{--                                        <li><a href="signin.html">Sign In</a></li>--}}
+{{--                                        <li><a href="signup.html">Sign Up</a></li>--}}
+{{--                                        <li><a href="contact.html">Contact Us</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </div>
@@ -254,7 +254,7 @@
                     <div class="footer-widget widget">
                         <div class="about_us_widget">
                             <a href="{{route('site.index')}}" class="footer-logo">
-                                <img src="{{setting()->logo}}" alt="{{setting()->title}} logo" height="90px" >
+                                <img src="{{setting()->logo}}" alt="{{setting()->title}} logo" height="40px" >
                             </a>
                         </div>
                     </div>

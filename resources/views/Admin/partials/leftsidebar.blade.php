@@ -26,7 +26,7 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="{{route('adminservices')}}"
-                       aria-expanded="false"><i  class=" fas fa-ambulance"></i><span
+                       aria-expanded="false"><i  class=" fas fas fa-motorcycle"></i><span
                             class="hide-menu">Xidmətlərimiz</span>
                     </a>
                 </li>
@@ -43,7 +43,38 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="{{route('adminfaq')}}"
                        aria-expanded="false"><i  class="icon-notebook"></i><span
-                            class="hide-menu">S.S.S</span>
+                            class="hide-menu">Sual-Cavab</span>
+                    </a>
+                </li>
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Məhsullar</span></li>
+
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{route('adminservices')}}"
+                       aria-expanded="false"><i  class="fas fa-check-square"></i><span
+                            class="hide-menu">Məhsul seçimləri</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{route('adminservices')}}"
+                       aria-expanded="false"><i  class=" fas fa-bookmark"></i><span
+                            class="hide-menu">Məhsul Kategoriyaları</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{route('adminservices')}}"
+                       aria-expanded="false"><i  class=" fas fa-boxes"></i><span
+                            class="hide-menu">Məhsullar</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link sidebar-link" href="{{route('adminservices')}}"
+                       aria-expanded="false"><i  class="fas fa-cart-plus"></i><span
+                            class="hide-menu">Sifarişlər</span>
                     </a>
                 </li>
 
