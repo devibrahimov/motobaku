@@ -14,14 +14,14 @@ class CreateServicesContentTable extends Migration
     public function up()
     {
         Schema::create('services_content', function (Blueprint $table) {
-            $table->id();
+
             $table->unsignedBigInteger('service_id');
             $table->string('lang')->nullable();
             $table->string('name')->nullable();
             $table->longText('content')->nullable();
             $table->string('meta_content',160)->nullable();
             $table->string('meta_keywords',800)->nullable();
-            $table->timestamps();
+
         });
     }
 

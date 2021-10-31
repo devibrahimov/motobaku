@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogCategoriesContentCreate extends Migration
+class CreateProductImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBlogCategoriesContentCreate extends Migration
      */
     public function up()
     {
-        Schema::create('blogcategory_contents', function (Blueprint $table) {
-
-            $table->unsignedBigInteger('base_id');
-            $table->string('lang');
+        Schema::create('product_images', function (Blueprint $table) {
+            $table->unsignedBigInteger('product_id');
             $table->string('name');
-
+            $table->boolean('base')->default(0) ;
         });
     }
 
@@ -27,8 +25,9 @@ class CreateBlogCategoriesContentCreate extends Migration
      *
      * @return void
      */
+
     public function down()
     {
-        Schema::dropIfExists('blogcategory_contents');
+        Schema::dropIfExists('product_images');
     }
 }

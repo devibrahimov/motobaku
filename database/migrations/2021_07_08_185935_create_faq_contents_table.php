@@ -14,12 +14,12 @@ class CreateFaqContentsTable extends Migration
     public function up()
     {
         Schema::create('faq_contents', function (Blueprint $table) {
-            $table->id();
+
             $table->string('lang');
             $table->unsignedBigInteger('faq_id');
             $table->string('question')->nullable();
             $table->text('answer')->nullable();
-            $table->timestamps();
+
         });
     }
 

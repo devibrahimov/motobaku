@@ -14,7 +14,7 @@ class CreateAboutusContentTable extends Migration
     public function up()
     {
         Schema::create('aboutus_content', function (Blueprint $table) {
-            $table->id();
+
             $table->bigInteger('about_id');
             $table->string('lang',5);
             $table->string('header',250)->nullable();
@@ -22,7 +22,7 @@ class CreateAboutusContentTable extends Migration
             $table->string('meta_content',160)->nullable();
             $table->string('meta_keywords',800)->nullable();
             $table->bigInteger('show')->default(0);
-            $table->timestamps();
+
 
         });
     }

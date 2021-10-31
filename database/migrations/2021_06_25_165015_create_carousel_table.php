@@ -14,11 +14,11 @@ class CreateCarouselTable extends Migration
     public function up()
     {
         Schema::create('carousel', function (Blueprint $table) {
-            $table->id();
+
             $table->string('image');
             $table->boolean('active')->default('1');
             $table->tinyInteger('desk')->default('1');
-            $table->timestamps();
+
         });
     }
 
